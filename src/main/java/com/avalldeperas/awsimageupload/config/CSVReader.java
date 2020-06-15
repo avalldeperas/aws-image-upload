@@ -10,14 +10,14 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 
-@Component
+@Service
 @RequiredArgsConstructor
 public class CSVReader {
 
