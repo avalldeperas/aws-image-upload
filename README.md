@@ -2,7 +2,7 @@
 
 ## Image upload with AWS and SpringBoot 2
 
-This project intention is to test the image upload using the Amazon Web Services (AWS) and SpringBoot 2. 
+This project intention's to test the image download & upload using the Amazon Web Services (AWS) and SpringBoot 2. 
 
 #### Tecnologies used
  1. SpringBoot 2 with [Spring Initalizr](https://start.spring.io/)
