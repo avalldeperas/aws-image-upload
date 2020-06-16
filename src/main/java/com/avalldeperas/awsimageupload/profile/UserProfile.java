@@ -12,10 +12,10 @@ import java.util.UUID;
 @EqualsAndHashCode
 public class UserProfile {
 
-    @Getter @Setter
-    private UUID userProfileId;
-    @Getter @Setter
-    private String username;
+    @Getter
+    private final UUID userProfileId;
+    @Getter
+    private final String username;
     @Setter
     private String userProfileImageLink;
 

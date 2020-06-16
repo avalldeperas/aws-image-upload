@@ -1,6 +1,5 @@
 package com.avalldeperas.awsimageupload.profile;
 
-import com.amazonaws.services.kendra.model.ContentType;
 import com.avalldeperas.awsimageupload.buckets.BucketName;
 import com.avalldeperas.awsimageupload.filestore.FileStore;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +37,7 @@ public class UserProfileService {
         String fileName = String.format("%s-%s", file.getOriginalFilename(), user.getUserProfileId());
         try {
             fileStore.save(path, fileName, file.getInputStream(), Optional.of(metadata));
+            user.setUserProfileImageLink(fileName);
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
@@ -68,5 +68,16 @@ public class UserProfileService {
     private void ifFileEmpty(MultipartFile file) {
         if(file.isEmpty())
             throw new IllegalStateException("Cannot upload empty file ["+ file.getSize() + "]");
+    }
+
+    public byte[] downloadProfileImage(UUID userProfileId) {
+        UserProfile user = getUserProfileOrThrow(userProfileId);
+        String path = String.format("%s/%s",
+                BucketName.PROFILE_IMAGE.getBucketName(),
+                user.getUserProfileId());
+
+        return user.getUserProfileImageLink()
+                .map(key -> fileStore.download(path, key))
+                .orElse(new byte[0]);
     }
 }
