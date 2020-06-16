@@ -1,13 +1,15 @@
 package com.avalldeperas.awsimageupload.datastore;
 
-import com.avalldeperas.awsimageupload.model.UserProfile;
+import com.avalldeperas.awsimageupload.profile.UserProfile;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * In-Memory DB to return fake users to the clients.
+ */
 @Repository
 public class FakeUserProfileDataStore {
 

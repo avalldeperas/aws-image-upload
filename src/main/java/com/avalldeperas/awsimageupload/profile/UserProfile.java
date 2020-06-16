@@ -1,4 +1,4 @@
-package com.avalldeperas.awsimageupload.model;
+package com.avalldeperas.awsimageupload.profile;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

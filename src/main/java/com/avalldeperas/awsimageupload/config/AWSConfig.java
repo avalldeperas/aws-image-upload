@@ -3,6 +3,7 @@ package com.avalldeperas.awsimageupload.config;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import org.apache.logging.log4j.LogManager;
@@ -20,12 +21,13 @@ public class AWSConfig {
 
     @Bean
     public AmazonS3 s3(){
-        AWSCredentials awsCredentials = new BasicAWSCredentials(
+        AWSCredentials awsCredentials = new BasicAWSCredentials (
                 csvReader.getAwsCredential().getAWSAccessKeyId(),
                 csvReader.getAwsCredential().getAWSSecretKey());
 
         return AmazonS3ClientBuilder
                 .standard()
+                .withRegion(Regions.EU_WEST_3) // fixes SdkClientException: Unable to find a region
                 .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
                 .build();
     }
