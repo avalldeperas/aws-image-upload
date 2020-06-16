@@ -35,7 +35,7 @@ public class UserProfileService {
         Map<String, String> metadata = extractMetadata(file);
 
         String path = String.format("%s/%s", BucketName.PROFILE_IMAGE.getBucketName(), user.getUserProfileId());
-        String fileName = String.format("%s-%s", file.getName(), user.getUserProfileId());
+        String fileName = String.format("%s-%s", file.getOriginalFilename(), user.getUserProfileId());
         try {
             fileStore.save(path, fileName, file.getInputStream(), Optional.of(metadata));
         } catch (IOException e) {
@@ -58,8 +58,11 @@ public class UserProfileService {
     }
 
     private void isFileImage(MultipartFile file) {
-        if(!Arrays.asList(IMAGE_JPEG, IMAGE_GIF, IMAGE_PNG).contains(file.getContentType()))
-            throw new IllegalStateException("File must be an image.");
+        if(!Arrays.asList(
+                IMAGE_JPEG.getMimeType(),
+                IMAGE_GIF.getMimeType(),
+                IMAGE_PNG.getMimeType()).contains(file.getContentType()))
+            throw new IllegalStateException("File must be an image [" + file.getContentType() +"]");
     }
 
     private void ifFileEmpty(MultipartFile file) {
